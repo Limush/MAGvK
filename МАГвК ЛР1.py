@@ -22,11 +22,7 @@ def find_S_t(n, count=1):
             return num, (n - 1) // degrees_2[num]
 
 
-# number = 1323
-# number = 99733
-# number = 99751
-number = 99881
-
+number = int(input('Введите число для проверки -> '))
 b = 0
 if number >= 3:
     print(f"Проверить являеться ли число n={number} простым:")
