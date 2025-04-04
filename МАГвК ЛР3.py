@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 a = int(input(f"Введите параметр a - "))
 b = int(input(f"Введите параметр b - "))
 D = 4 * a**3 + 27 * b**2
