@@ -1,10 +1,6 @@
 from prettytable import PrettyTable
 
 
-def Equation(function, x):
-    return eval(function.replace('x', str(x)))
-
-
 def inference(array, task):
     numbers = [str(i) for i in range(0, len(array_x))]
     table = PrettyTable()
@@ -21,9 +17,13 @@ def inference(array, task):
     return table
 
 
-a = 6
-b = 3
-p = 11
+def Equation(function, x):
+    return eval(function.replace('x', str(x)))
+
+
+a = int(input('Введите a -> '))
+b = int(input('Введите b -> '))
+p = int(input('Введите p -> '))
 function = f"x**3+{a}*x+{b}"
 print(f"Необходимо найти все точки ЭК:\n\t y^2 = x^3 + {a}x + {b} (mod {p})")
 
