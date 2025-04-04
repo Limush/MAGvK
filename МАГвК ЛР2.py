@@ -12,19 +12,20 @@ def funk(x):
 
 
 n = int(input('Число n = '))
-c, function = int(input('Число c = ')), input("Введите функцию -> ")
+c = int(input('Число c = '))
+function = input("Введите функцию -> ")
 
-a, b, num = 1, 1, 0
+a = funk(c)
+b = funk(funk(c))
+num = 1
+print(f'i = {num}:')
+print(f'\ta = f({c}) = {a}\n\tb = f(f({c})) = {b}')
 while True:
-    print(f'i = {num + 1}:')
-    if num == 0:
-        a, b = funk(c), funk(funk(c))
-        print(f'\ta = f({c}) = {a}\n\tb = f(f({c})) = {b}')
-    else:
-        a_save, b_save = a, b
-        a, b = funk(a), funk(funk(b))
-        print(f'\ta = f({a_save}) = {a}\n\tb = f(f({b_save})) = {b}')
     num += 1
+    print(f'i = {num}:')
+    a_save, b_save = a, b
+    a, b = funk(a), funk(funk(b))
+    print(f'\ta = f({a_save}) = {a}\n\tb = f(f({b_save})) = {b}')
 
     d = Nod((a - b) if a > b else (b - a), n)
     if d > 1:
