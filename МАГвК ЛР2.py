@@ -1,4 +1,10 @@
-from Functions.Nod import Nod
+def Nod(a, b):
+    if a == 0 or b == 0:
+        return 0
+    while True:
+        a, b = b, a % b
+        if b == 0:
+            return a
 
 
 def funk(x):
