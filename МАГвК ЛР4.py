@@ -67,11 +67,11 @@ if len(P) == 2 and len(Q) == 2:
                 cheak += 1
 
         if cheak == 2:
-            k_sum = ((Q[1] - P[1]) * Euler(Q[0] - P[0], p)) % p
+            k_sum = pow((Q[1] - P[1]) * pow((Q[0] - P[0]), -1, p), 1, p)
             x3 = (k_sum**2 - P[0] - Q[0]) % p
             y3 = (k_sum * (P[0] - x3) - P[1]) % p
 
-            k_mult = ((3*P[0]**2+a) * Euler(2*P[1], p)) % p
+            k_mult = pow((3 * P[0] ** 2 + a) * pow((2 * P[1]), -1, p), 1, p)
             x4 = (k_mult**2 - 2 * P[0]) % p
             y4 = (k_mult * (P[0] - x4) - P[1]) % p
             print(f'P{P}\n'
