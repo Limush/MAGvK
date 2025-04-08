@@ -78,9 +78,8 @@ while len(array_chet) != count:
     else:
         array_chet.append(poisk_sum(array_chet[1], array_chet[-1]))
 
-for i in range(1, len(array_chet)):
-    if len(array_chet[i]) == 2:
-        print(f"{' '*(2-len(str(i)))}{i}P = ({array_chet[i][0]},{array_chet[i][1]})")
-    else:
-        print(f"{' ' * (2 - len(str(i)))}{i}P = {array_chet[i]}")
+if len(array_chet[count]) == 2:
+    print(f"{count}P = ({array_chet[count][0]},{array_chet[count][1]})")
+else:
+    print(f"{count}P = {array_chet[count]}")
 
