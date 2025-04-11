@@ -42,25 +42,46 @@ print(f"y^2 = x^3 + {a}x + {b} (mod {p})\n"
       f"\tТочки ЭК:")
 print('(' + ');('.join(array_per[1:]) + ')' + f" и {array_per[0]}")
 
-P = (0, 0)
+P = (1, 10)
 try:
     P = (input("Введите координаты P через пробел -> ").split())
+    P = (int(P[0]), int(P[1]))
 except:
     print("Введено не правильно")
 
-count = int(input("Какое P посчитать ->")) + 1
-array_chet = [(0, 0)]
-while len(array_chet) != count:
-    if len(array_chet) == 1:
-        array_chet.append(P)
-        continue
-    elif len(array_chet) != 1 and len(array_chet) % 2 == 0:
-        array_chet.append(poisk_um(array_chet[len(array_chet) // 2]))
+count = 7
+while True:
+    task = input(f"1 - Поменять точку\n2 - Поменять какое P найти\n3 - Считать для текущих данных\n--->")
+    if task == '1':
+        try:
+            P = (input("Введите координаты P через пробел -> ").split())
+            P = (int(P[0]), int(P[1]))
+        except:
+            print("Введено не правильно")
+    elif task == '2':
+        count = int(input("Какое P посчитать ->"))
     else:
-        array_chet.append(poisk_sum(array_chet[1], array_chet[-1]))
+        cheak = 0
+        for i in range(1, len(array_per)):
+            sim1, sim2 = array_per[i].split(", ")
+            if P[0] == int(sim1) and P[1] == int(sim2):
+                cheak += 1
 
-if len(array_chet[count]) == 2:
-    print(f"{count}P = ({array_chet[count][0]},{array_chet[count][1]})")
-else:
-    print(f"{count}P = {array_chet[count]}")
+        if cheak == 1:
+            array_chet = [(0, 0)]
+            while len(array_chet) != count + 1:
+                if len(array_chet) == 1:
+                    array_chet.append(P)
+                    continue
+                elif len(array_chet) != 1 and len(array_chet) % 2 == 0:
+                    array_chet.append(poisk_um(array_chet[len(array_chet) // 2]))
+                else:
+                    array_chet.append(poisk_sum(array_chet[1], array_chet[-1]))
 
+            for i in range(1, len(array_chet)):
+                if len(array_chet[i]) == 2:
+                    print(f"{' ' * (2 - len(str(i)))}{i}P = ({array_chet[i][0]},{array_chet[i][1]})")
+                else:
+                    print(f"{' ' * (2 - len(str(i)))}{i}P = {array_chet[i]}")
+        else:
+            print("Это не точка ЭК")

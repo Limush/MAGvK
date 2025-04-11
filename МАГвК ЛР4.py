@@ -32,8 +32,6 @@ for i in range(p):
     array_x.append(Equation(function, i) % p)
     array_y.append((i*i) % p)
 
-numbers = [str(i) for i in range(0, len(array_x))]
-
 print(inference(array_x, 'x'))
 print(inference(array_y, 'y'))
 
