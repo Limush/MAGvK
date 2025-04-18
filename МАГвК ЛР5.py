@@ -42,7 +42,7 @@ print(f"y^2 = x^3 + {a}x + {b} (mod {p})\n"
       f"\tТочки ЭК:")
 print('(' + ');('.join(array_per[1:]) + ')' + f" и {array_per[0]}")
 
-P = (1, 10)
+P = (10, 8)
 try:
     P = (input("Введите координаты P через пробел -> ").split())
     P = (int(P[0]), int(P[1]))
@@ -76,8 +76,17 @@ while True:
                 elif len(array_chet) != 1 and len(array_chet) % 2 == 0:
                     array_chet.append(poisk_um(array_chet[len(array_chet) // 2]))
                 else:
-                    array_chet.append(poisk_sum(array_chet[1], array_chet[-1]))
-
+                    num = 1
+                    while True:
+                        ob = len(array_chet) - num
+                        koor = poisk_sum(array_chet[num], array_chet[ob])
+                        if koor == 'O':
+                            num += 1
+                        else:
+                            array_chet.append(koor)
+                            break
+                        if num == len(array_chet):
+                            break
             for i in range(1, len(array_chet)):
                 if len(array_chet[i]) == 2:
                     print(f"{' ' * (2 - len(str(i)))}{i}P = ({array_chet[i][0]},{array_chet[i][1]})")
