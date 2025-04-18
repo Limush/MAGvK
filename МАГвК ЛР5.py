@@ -86,6 +86,7 @@ while True:
                             array_chet.append(koor)
                             break
                         if num == len(array_chet):
+                            array_chet.append('O')
                             break
             for i in range(1, len(array_chet)):
                 if len(array_chet[i]) == 2:
