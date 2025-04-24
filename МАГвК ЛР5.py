@@ -1,4 +1,8 @@
 def poisk_sum(P, Q):
+    if P == 'O' and Q != 'O':
+        return Q[0], Q[1]
+    elif P != 'O' and Q == 'O':
+        return P[0], P[1]
     try:
         k_sum = pow((Q[1] - P[1]) * pow((Q[0] - P[0]), -1, p), 1, p)
     except:
