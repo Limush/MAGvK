@@ -66,6 +66,33 @@ def find_xP(count, P):
     return array_chet
 
 
+def find_P(count, P):
+    array_chet = [(0, 0)]
+    while len(array_chet) != count + 1:
+        if len(array_chet) == 1:
+            array_chet.append(P)
+            continue
+        elif len(array_chet) != 1 and len(array_chet) % 2 == 0:
+            array_chet.append(poisk_um(array_chet[len(array_chet) // 2]))
+        else:
+            num = 1
+            while True:
+                ob = len(array_chet) - num
+                koor = poisk_sum(array_chet[num], array_chet[ob])
+                if koor == 'O':
+                    num += 1
+                else:
+                    if koor in array_chet:
+                        return len(list(set(array_chet[1:])))
+                    array_chet.append(koor)
+                    break
+                if num == len(array_chet):
+                    if koor in array_chet:
+                        return len(list(set(array_chet[1:])))
+                    array_chet.append('O')
+                    break
+    return array_chet
+
 a = int(input('Введите a -> '))
 b = int(input('Введите b -> '))
 p = int(input('Введите p -> '))
@@ -115,24 +142,41 @@ while True:
             print(f"R = {R}")
             print(f"\tПункт 5:")
             t, i = -1, 0
+            req = 0
+            T = find_P(10000, P)
+            num = T // m
             for y in range(m):
-                if R in P_t:
-                    t = P_t.index(R)
+                if y == num:
                     i = y
-                    print(f"i = {y}: R = {R} - содержится в табл, при t = {t + 1}")
+                    t = num
+                    print(f"i = {y}: R = {P_t[num]} - содержится в табл, при t = {num}")
                     break
-                else:
+                elif R in P_t:
+                    req = 1
                     print(f"i = {y}: R = {R} - не содержится в табл")
                     if y == 0:
                         R = Q
+                    elif R == Q:
+                        R = poisk_um(P)
                     else:
-                        R = poisk_sum(P, Q)
+                        R = poisk_sum(R, Q)
+                    print(f"=> R = R + Q = {R}")
+
+                else:
+                    print(f"i = {y}: R = {R} - не содержится в табл")
+
+                    if y == 0:
+                        R = Q
+                    elif R == Q:
+                        R = poisk_um(P)
+                    else:
+                        R = poisk_sum(R, Q)
                     print(f"=> R = R + Q = {R}")
             if t != -1:
-                n = m * i + t + 1
-                print(f"=> n = {m} * {i} + {t + 1} = {n}")
+                n = T
+                print(f"=> n = {m} * {i} + {T - (m*i)} = {T}")
                 print(f"\tПункт 6:")
-                print(f"n = {n}\n")
+                print(f"n = {T}\n")
             else:
                 print(f"t не найдено\n")
         else:
