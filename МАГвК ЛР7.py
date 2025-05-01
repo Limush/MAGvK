@@ -69,6 +69,9 @@ def find_xP(count, P):
 a = int(input('Введите a -> '))
 b = int(input('Введите b -> '))
 p = int(input('Введите p -> '))
+# a = 2
+# b = 3
+# p = 17
 function = f"x**3+{a}*x+{b}"
 
 array_x, array_y = [], []
@@ -87,55 +90,69 @@ print(f"y^2 = x^3 + {a}x + {b} (mod {p})\n\tТочки ЭК:")
 print('(' + ');('.join(array_per[1:]) + ')' + f" и {array_per[0]}")
 
 P = Input_Litter("P")
+# P = (13, 4)
 X = Input_Litter("X")
+# X = (11, 8)
 c = int(input("c = "))
-
-if P in array_full:
-    X_LKG = [X]
-    print(f"1) Линейный конгруэнтный генератор:\n"
-          f"X(i+1) = c * X(i) + P = {c} * X(i) + {P}\n"
-          f"X(0) = {X}")
-    while True:
-        num = find_xP(c, X_LKG[-1])
-        if num != P:
-            x_next = poisk_sum(num, P)
-        else:
-            x_next = poisk_um(num)
-        print(f"X({len(X_LKG)}) = {c} * {X_LKG[-1]} + {P} = {find_xP(c, X_LKG[-1])} + {P} = {x_next}")
-        X_LKG.append(x_next)
-        if x_next in X_LKG[1:-1]:
-            break
-    print(f"Период = {len(X_LKG[1:-1])}\n\n")
-
-    X_IG = [X]
-    print(f"1) Инверсивный генератор:\n"
-          f"X(i+1) = c * X(i)^-1 + P = {c} * X(i)^-1 + {P}\n"
-          f"X(0) = {X}")
-    while True:
-        if X_IG[-1] == 'O':
-            X_obr = 'O'
-        else:
-            X_obr = (X_IG[-1][0], -X_IG[-1][1] % p)
-        num = find_xP(c, X_obr)
-        if num != P:
-            x_next = poisk_sum(num, P)
-        else:
-            x_next = poisk_um(num)
-        print(f"X({len(X_IG)}) = {c} * {X_obr} + {P} = {find_xP(c, X_obr)} + {P} = {x_next}")
-        X_IG.append(x_next)
-        if x_next in X_IG[1:-1]:
-            break
-    print(f"Период = {len(X_IG[1:-1])}")
-    def Array_str(mass):
-        string = ''
-        for i in range(len(mass)):
-            if len(mass[i]) != 1:
-                string += f"({mass[i][0]}, {mass[i][1]}) "
+# c = 5
+# 1 1 13
+# 12 8
+# 10 7
+# 7
+# while True:
+# task = input(f"1 - Поменять точку\n2 - Считать для текущих данных\n--->")
+task = '2'
+if task == '1' or P == False:
+    P = Input_Litter("P")
+elif task == '2':
+    if P in array_full:
+        X_LKG = [X]
+        print(f"1) Линейный конгруэнтный генератор:\n"
+              f"X(i+1) = c * X(i) + P = {c} * X(i) + {P}\n"
+              f"X(0) = {X}")
+        while True:
+            num = find_xP(c, X_LKG[-1])
+            if num != P:
+                x_next = poisk_sum(num, P)
             else:
-                string += f"{mass[i]} "
-        return string
-    print(f"Ответ:\n"
-          f"1){Array_str(X_LKG[:-2])}\n"
-          f"2){Array_str(X_IG[:-2])}\n")
-else:
-    print("Это не точка ЭК")
+                x_next = poisk_um(num)
+            print(f"X({len(X_LKG)}) = {c} * {X_LKG[-1]} + {P} = {find_xP(c, X_LKG[-1])} + {P} = {x_next}")
+            X_LKG.append(x_next)
+            if x_next in X_LKG[1:-1]:
+                break
+        print(f"Период = {len(X_LKG[1:-1])}\n\n")
+
+        X_IG = [X]
+        print(f"1) Инверсивный генератор:\n"
+              f"X(i+1) = c * X(i)^-1 + P = {c} * X(i)^-1 + {P}\n"
+              f"X(0) = {X}")
+        while True:
+            if X_IG[-1] == 'O':
+                X_obr = 'O'
+            else:
+                X_obr = (X_IG[-1][0], -X_IG[-1][1] % p)
+            num = find_xP(c, X_obr)
+            if num != P:
+                x_next = poisk_sum(num, P)
+            else:
+                x_next = poisk_um(num)
+            print(f"X({len(X_IG)}) = {c} * {X_obr} + {P} = {find_xP(c, X_obr)} + {P} = {x_next}")
+            X_IG.append(x_next)
+            if x_next in X_IG[1:-1]:
+                break
+        print(f"Период = {len(X_IG[1:-1])}")
+        def Array_str(mass):
+            string = ''
+            for i in range(len(mass)):
+                if len(mass[i]) != 1:
+                    string += f"({mass[i][0]}, {mass[i][1]}) "
+                else:
+                    string += f"{mass[i]} "
+            return string
+        print(f"Ответ:\n"
+              f"1){Array_str(X_LKG[:-2])}\n"
+              f"2){Array_str(X_IG[:-2])}\n")
+    else:
+        print("Это не точка ЭК")
+    # else:
+    #     break
